@@ -1,0 +1,123 @@
+select train.T_No,T_Name,(COALESCE(r1.journey_days,'') || COALESCE(r1.arrival,'')),(COALESCE(r2.journey_days,'')|| COALESCE(r2.arrival,'')) from
+station s1, station s2, route r1, route r2, schedule_days s, train
+where
+s1.s_name ='Anand Vihar Terminal' and s2.s_name = 'Lucknow' and s1.s_id = r1.s_id and s2.s_id = r2.s_id 
+and r1.t_no = r2.t_no and (COALESCE(r1.journey_days,'') || COALESCE(r1.arrival,''))<(COALESCE(r2.journey_days,'')|| COALESCE(r2.arrival,'')) and train.t_no = s.t_no 
+and day = 'MONDAY' and train.t_no=r1.t_no;
+
+
+with
+ stationnames(s1,s2) as (select s.s_id,t.s_id from station s,station t where 'Anand Vihar'=s.s_name and 'Lucknow'=t.s_name),
+arrivaltimes(a1,a2,a3,a4) as (select x.arrival,x.journey_days,y.arrival,y.journey_days from route x,route y,stationnames where y.t_no=c and x.t_no=c and s1=x.s_id and s2=y.s_id),
+
+tstations(sa,sb,sc,sd) as (select s_name,x.platformno,x.departure,x.arrival from stationnames,route x,station,arrivaltimes
+where station.s_id=x.s_id  and  s1=x.s_id and x.t_no=12426 and (coalesce(x.journey_days,'')||coalesce(x.arrival,'')) between (coalesce(a2,'')||coalesce(a1,'')) and (coalesce(a4,'')||coalesce(a3,'')))
+select sa,sb,sc,sd from tstations;
+
+
+with
+ stationnames(s1,s2) as (select s.s_id,t.s_id from station s,station t where '"+Source+"'=s.s_name and '"+Destination+"'=t.s_name),
+arrivaltimes(a1,a2,a3,a4) as (select x.arrival,x.journey_days,y.arrival,y.journey_days from route x,route y,stationnames where y.t_no="+tno+" and x.t_no="+tno+" and stationnames.s1=x.s_id and stationnames.s2=y.s_id),
+
+tstations(sa,sb,sc,sd) as (select s_name,x.platformno,x.departure,x.arrival from stationnames,route x,station,arrivaltimes 
+where station.s_id=x.s_id  and x.t_no="+tno+" and (coalesce(x.journey_days,'')||coalesce(x.arrival,'')) between (coalesce(a2,'')||coalesce(a1,'')) and (coalesce(a4,'')||coalesce(a3,'')))
+
+select sa,sb,sd,sc from tstations;
+
+
+
+
+
+
+
+insert into student1 values('12347','Pandurang2','Comp. Sci.',126);
+insert into student1 values('12348','Pandurang3','Comp. Sci.',127);
+
+
+
+with
+ stationnames(s1,s2) as (select s.s_id,t.s_id from station s,station t where 'Anand Vihar Terminal'=s.s_name and 'Varanasi JN'=t.s_name),
+arrivaltimes(a1,a2,a3,a4) as (select x.arrival,x.journey_days,y.arrival,y.journey_days from route x,route y,stationnames where y.t_no=22408 and x.t_no=22408 and stationnames.s1=x.s_id and stationnames.s2=y.s_id),
+
+tstations(sa,sb,sc,sd) as (select s_name,x.platformno,x.departure,x.arrival from stationnames,route x,station,arrivaltimes 
+where station.s_id=x.s_id  and x.t_no=22408 and (coalesce(x.journey_days,'')||coalesce(x.arrival,'')) between (coalesce(a2,'')||coalesce(a1,'')) and (coalesce(a4,'')||coalesce(a3,'')) order by (coalesce(x.journey_days,'')||coalesce(x.arrival,'')))
+
+select sa,sb,sd,sc from tstations;
+
+implementing query 1,2
+pop up for train info
+date exception
+
+
+
+New Delhi
+Chennai Central
+Mathura
+Agra Cantt
+KSR Bengaluru
+Dhaulpur
+Morena
+Gwalior JN
+Jabalpur
+Jhansi JN
+Howrah JN
+Mumbai Central
+Patna JN
+Anand Vihar Terminal
+Jammu TAWI
+Lalitpur
+Bhopal JN
+Habibganj
+Ghaziabad
+Aligarh JN
+Tundla JN
+EtawahKanpur Central
+Lucknow JN
+Ambala Cant JN
+Sirhind JN
+Ludhiana JN
+Phagwara JN
+Jalandhar City
+Beas
+Amritsar JN
+Katpadi JN
+Bangalore Cant
+Jolarpettai
+Salem JN
+Erode JN
+Tiruppur
+Coimbatore JN
+Allahabad JN
+Rajendranagar T
+Madan Mahal
+Sridham
+Narsinghpur
+Kareli
+Gadarwara
+Pipariya
+Itarsi JN
+Hoshangabad
+Vadodara JN
+Ratlam JN
+Sawai Madhopur
+Jaipur
+Tatanagar JN
+Bilaspur JN
+Nagpur
+Bhusaval JN
+Igatpuri
+C Shivaji Maharaj T
+Kota JN
+Asansol JN
+Shalimar
+Moradabad
+Bareilly
+Lucknow
+Rae Bareli JN
+Amethi
+Partapgarh JN
+Bhadohi
+Varanasi JN
+Kathua
+Pathankoth Cantt
+Mughal Sarai JN
